@@ -1380,6 +1380,7 @@ class MyOrder(object):
         print(u'等待订单流水号...')
         url = 'https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=%13d&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=%s' % (
             random.randint(1000000000000, 1999999999999), self.repeatSubmitToken)
+        print url
         r = self.get(url)
         if not r:
             print(u'等待订单流水号异常')
