@@ -13,6 +13,7 @@ import random
 import smtplib
 from email.mime.text import MIMEText
 from itertools import chain
+import json
 # 第三方库
 import requests
 from huzhifeng import dumpObj, hasKeys
@@ -891,7 +892,7 @@ class MyOrder(object):
         if not r:
             print(u'查询车票异常')
 
-        url = 'https://kyfw.12306.cn/otn/leftTicket/queryT?'
+        url = 'https://kyfw.12306.cn/otn/leftTicket/query?'
         parameters = [
             ('leftTicketDTO.train_date', self.train_date),
             ('leftTicketDTO.from_station', self.from_station_telecode),
@@ -904,6 +905,7 @@ class MyOrder(object):
             print(u'查询车票异常')
             return RET_ERR
         obj = r.json()
+
         if (hasKeys(obj, ['status', 'httpstatus', 'data']) and len(obj['data'])):
             self.trains = obj['data']
             return RET_OK
@@ -990,28 +992,28 @@ class MyOrder(object):
                 },
             }
             # 分析票价和余票数量
-            while i < (len(t['yp_info']) / 10):
-                tmp = t['yp_info'][i * 10:(i + 1) * 10]
-                price = int(tmp[1:5])
-                left = int(tmp[-3:])
-                if tmp[0] == '1':
-                    if tmp[6] == '3':
-                        ypInfo['wz']['price'] = price
-                        ypInfo['wz']['left'] = left
-                    else:
-                        ypInfo['yz']['price'] = price
-                        ypInfo['yz']['left'] = left
-                elif tmp[0] == '3':
-                    ypInfo['yw']['price'] = price
-                    ypInfo['yw']['left'] = left
-                elif tmp[0] == '4':
-                    ypInfo['rw']['price'] = price
-                    ypInfo['rw']['left'] = left
-                i = i + 1
-            yz_price = u'硬座%s' % (
-                ypInfo['yz']['price']) if ypInfo['yz']['price'] else ''
-            yw_price = u'硬卧%s' % (
-                ypInfo['yw']['price']) if ypInfo['yw']['price'] else ''
+            # while i < (len(t['yp_info']) / 10):
+                # tmp = t['yp_info'][i * 10:(i + 1) * 10]
+                # price = int(tmp[1:5])
+                # left = int(tmp[-3:])
+                # if tmp[0] == '1':
+                    # if tmp[6] == '3':
+                        # ypInfo['wz']['price'] = price
+                        # ypInfo['wz']['left'] = left
+                    # else:
+                        # ypInfo['yz']['price'] = price
+                        # ypInfo['yz']['left'] = left
+                # elif tmp[0] == '3':
+                    # ypInfo['yw']['price'] = price
+                    # ypInfo['yw']['left'] = left
+                # elif tmp[0] == '4':
+                    # ypInfo['rw']['price'] = price
+                    # ypInfo['rw']['left'] = left
+                # i = i + 1
+            # yz_price = u'硬座%s' % (
+                # ypInfo['yz']['price']) if ypInfo['yz']['price'] else ''
+            # yw_price = u'硬卧%s' % (
+                # ypInfo['yw']['price']) if ypInfo['yw']['price'] else ''
             print(u'(%d)   %s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (
                 index,
                 t['station_train_code'],
