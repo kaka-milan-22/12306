@@ -511,27 +511,22 @@ class MyOrder(object):
         else:
             return None
 
-
     def transposition(self, pos):
+        posDict = {
+        "1" : "65,65,",
+        "2" : "130,65,",
+        "3" : "195,65,",
+        "4" : "260,65,",
+        "5" : "65,130,",
+        "6" : "130,130,",
+        "7" : "195,130,",
+        "8" : "260,130,",
+        }
+        randstr = ""
         posList = pos.split(",")
-        y = []
-        x = []
-        posstr = ""
-        for k,v in enumerate(posList):
-            if k % 2 == 0:
-                x.append(int(v))
-            else:
-                y.append(int(v))
-
-        x = map(lambda x:x*65, x)
-        y = map(lambda x:x*65, y)
-
-        tl = list(chain(zip(x,y)))
-        for i in tl:
-            posstr += "%s,%s," % (str(i[1]),str(i[0]))
-        # print posstr[0:-1]
-        return posstr[0:-1]
-
+        for p in posList:
+            randstr += posDict[p]
+        return randstr[0:-1]
 
     def getCaptcha(self, url):
         self.updateHeaders(url)
@@ -947,7 +942,7 @@ class MyOrder(object):
             self.from_city_name,
             self.to_city_name))
         printDelimiter()
-        print(u'序号/车次\t乘车站\t目的站\t一等\t二等\t软卧\t硬卧\t硬座\t无座')
+        print(u'序号/车次\t乘车站\t目的站\t出发\t达到\t一等\t二等\t软卧\t硬卧\t硬座\t无座')
         seatTypeCode = {
             'swz': '商务座',
             'tz': '特等座',
@@ -1014,11 +1009,13 @@ class MyOrder(object):
                 # ypInfo['yz']['price']) if ypInfo['yz']['price'] else ''
             # yw_price = u'硬卧%s' % (
                 # ypInfo['yw']['price']) if ypInfo['yw']['price'] else ''
-            print(u'(%d)   %s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (
+            print(u'(%d)   %s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % (
                 index,
                 t['station_train_code'],
                 t['from_station_name'][0:3],  # 最多保留3个中文
                 t['to_station_name'][0:3],  # 最多保留3个中文
+                t['start_time'],
+                t['arrive_time'],
                 t['zy_num'],
                 t['ze_num'],
                 ypInfo['rw']['left'] if ypInfo['rw']['left'] else t['rw_num'],
@@ -1380,7 +1377,6 @@ class MyOrder(object):
         print(u'等待订单流水号...')
         url = 'https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=%13d&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=%s' % (
             random.randint(1000000000000, 1999999999999), self.repeatSubmitToken)
-        print url
         r = self.get(url)
         if not r:
             print(u'等待订单流水号异常')
