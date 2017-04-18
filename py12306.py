@@ -511,6 +511,27 @@ class MyOrder(object):
         else:
             return None
 
+
+    # def transposition(self, pos):
+        # posList = pos.split(",")
+        # y = []
+        # x = []
+        # posstr = ""
+        # for k,v in enumerate(posList):
+            # if k % 2 == 0:
+                # x.append(int(v))
+            # else:
+                # y.append(int(v))
+
+        # x = map(lambda x:x*65, x)
+        # y = map(lambda x:x*65, y)
+
+        # tl = list(chain(zip(x,y)))
+        # for i in tl:
+            # posstr += "%s,%s," % (str(i[1]),str(i[0]))
+        # # print posstr[0:-1]
+        # return posstr[0:-1]
+
     def transposition(self, pos):
         posDict = {
         "1" : "65,65,",
@@ -1384,6 +1405,7 @@ class MyOrder(object):
         # {"validateMessagesShowId":"_validatorMessage","status":true,"httpstatus":200,"data":{"queryOrderWaitTimeStatus":true,"count":0,"waitTime":4,"requestId":5944637152210732219,"waitCount":2,"tourFlag":"dc","orderId":null},"messages":[],"validateMessages":{}}
         # {"validateMessagesShowId":"_validatorMessage","status":true,"httpstatus":200,"data":{"queryOrderWaitTimeStatus":true,"count":0,"waitTime":-1,"requestId":5944637152210732219,"waitCount":0,"tourFlag":"dc","orderId":"E739900792"},"messages":[],"validateMessages":{}}
         obj = r.json()
+        print obj
         if not (
                 hasKeys(obj, ['status', 'httpstatus', 'data'])
                 and hasKeys(obj['data'], ['orderId'])
@@ -1543,13 +1565,13 @@ def main():
         #  continue
         # 提交订单到队里中
         tries = 0
-        while tries < 2:
+        while tries < 5:
             tries += 1
             if order.confirmSingleForQueue() == RET_OK:
                 break
         # 获取orderId
         tries = 0
-        while tries < 2:
+        while tries < 5:
             tries += 1
             if order.queryOrderWaitTime() == RET_OK:
                 break

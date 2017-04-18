@@ -1,0 +1,280 @@
+请输入4位图片验证码(回车刷新验证码):
+1,2,1,3,2,4
+[('randCode', '130,65,195,65,260,130'), ('rand', 'randp'), ('_json_att', ''), ('REPEAT_SUBMIT_TOKEN', u'9ad519fd35a835446b9c3e95a1bcaa34')]
+正在校验验证码...
+校验验证码成功
+检查订单...
+检查订单成功
+提交订单排队...
+订单排队中...
+等待订单流水号...
+https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=1700510143187&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=9ad519fd35a835446b9c3e95a1bcaa34
+等待订单流水号失败
+{
+  "status": true,
+  "validateMessagesShowId": "_validatorMessage",
+  "messages": [],
+  "httpstatus": 200,
+  "validateMessages": {},
+  "data": {
+    "count": 0,
+    "waitCount": 1,
+    "orderId": null,
+    "tourFlag": "dc",
+    "waitTime": 4,
+    "requestId": 6259617391687045731,
+    "queryOrderWaitTimeStatus": true
+  }
+}
+等待订单流水号...
+https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=1066132750872&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=9ad519fd35a835446b9c3e95a1bcaa34
+等待订单流水号失败
+{
+  "status": true,
+  "validateMessagesShowId": "_validatorMessage",
+  "messages": [],
+  "httpstatus": 200,
+  "validateMessages": {},
+  "data": {
+    "count": 0,
+    "waitCount": 1,
+    "orderId": null,
+    "tourFlag": "dc",
+    "waitTime": 4,
+    "requestId": 6259617391687045731,
+    "queryOrderWaitTimeStatus": true
+  }
+}
+等待订票结果...
+
+余票查询结果如下:
+2017-04-26  深圳北--->郑州东
+'有':票源充足  '无':票已售完  '*':未到起售时间  '--':无此席别
+----------------------------------------------------------------
+序号/车次 乘车站 目的站 一等  二等  软卧  硬卧  硬座  无座
+(1)   G280  深圳北 郑州东 有 有 --  --  --  --
+(2)   G72 福田  郑州东 有 有 --  --  --  --
+(3)   G74 深圳北 郑州东 有 有 --  --  --  --
+(4)   G818  深圳北 郑州  6 有 --  --  --  --
+(5)   G532  深圳北 郑州东 有 2 --  --  --  --
+(6)   G822  深圳北 郑州  有 有 --  --  --  --
+(7)   K134  深圳西 郑州  --  --  无 有 有 有
+(8)   G80 福田  郑州东 有 有 --  --  --  无
+(9)   G826  深圳北 郑州  有 有 --  --  --  无
+(10)   G76  深圳北 郑州东 12  有 --  --  --  --
+(11)   Z148 深圳东 郑州  --  --  2 有 有 有
+----------------------------------------------------------------
+您可以选择:
+1~11.选择车次开始订票
+p.更换乘车人
+s.更改席别
+d.更改乘车日期
+f.更改出发站
+t.更改目的站
+a.同时更改乘车日期,出发站和目的站
+u.查询未完成订单
+c.查看订票信息
+r.刷票模式
+n.普通模式
+q.退出
+刷新车票请直接回车
+----------------------------------------------------------------
+
+
+(9)   G826  深圳北 郑州  有 有 --  --  --  无
+{
+    u'start_station_telecode': u'IOQ',
+    u'end_city_code': u'1222',
+    u'start_province_code': u'16',
+    u'tz_num': u'--',
+    u'seat_feature': u'O3M393',
+    u'yz_num': u'--',
+    u'controlled_train_flag': u'0',
+    u'train_no': u'6i00000G7606',
+    u'day_difference': u'0',
+    u'yp_info': u'vv4S8gCMQ8fRcjHkBJVyA88PNoybcQxWE3DvlM69hKJEuiUB',
+    u'yb_num': u'--',
+    u'start_station_name': u'\u6df1\u5733\u5317',
+    u'end_station_telecode': u'ZAF',
+    u'rw_num': u'--',
+    u'swz_num': u'4',
+    u'control_day': 29,
+    u'ze_num': u'\u6709',
+    u'canWebBuy': u'Y',
+    u'from_station_telecode': u'IOQ',
+    u'controlled_train_message': u'\u6b63\u5e38\u8f66\u6b21\uff0c\u4e0d\u53d7\u63a7',
+    u'lishi': u'07: 09',
+    u'location_code': u'Q7',
+    u'rz_num': u'--',
+    u'lishiValue': u'429',
+    u'end_station_name': u'\u90d1\u5dde\u4e1c',
+    u'is_support_card': u'1',
+    u'start_train_date': u'20170426',
+    u'seat_types': u'O9M',
+    u'gr_num': u'--',
+    u'from_station_no': u'01',
+    u'start_time': u'15: 40',
+    u'wz_num': u'--',
+    u'to_station_telecode': u'ZAF',
+    u'train_seat_feature': u'3',
+    u'yp_ex': u'O090M0',
+    u'start_city_code': u'1505',
+    u'yw_num': u'--',
+    u'zy_num': u'12',
+    u'to_station_no': u'12',
+    u'control_train_day': u'20991231',
+    u'train_class_name': u'',
+    u'qt_num': u'--',
+    u'from_station_name': u'\u6df1\u5733\u5317',
+    u'arrive_time': u'22: 49',
+    u'station_train_code': u'G76',
+    u'gg_num': u'--',
+    u'to_station_name': u'\u90d1\u5dde\u4e1c',
+    u'train_type_code': u'2',
+    u'sale_time': u'0900',
+    u'end_province_code': u'13'
+}
+(10)   G76  深圳北 郑州东 12  有 --  --  --  --
+{
+    u'start_station_telecode': u'BJQ',
+    u'end_city_code': u'1222',
+    u'start_province_code': u'16',
+    u'tz_num': u'--',
+    u'seat_feature': u'W3431333',
+    u'yz_num': u'\u6709',
+    u'controlled_train_flag': u'0',
+    u'train_no': u'650000Z14803',
+    u'day_difference': u'1',
+    u'yp_info': u'io01k0yL6Bew%2BziQXYiz%2FQROXb1e3zKN5hgayBMOXsEqaN%2B9hhITtFjtUE0%3D',
+    u'yb_num': u'--',
+    u'start_station_name': u'\u6df1\u5733\u4e1c',
+    u'end_station_telecode': u'ZZF',
+    u'rw_num': u'2',
+    u'swz_num': u'--',
+    u'control_day': 29,
+    u'ze_num': u'--',
+    u'canWebBuy': u'Y',
+    u'from_station_telecode': u'BJQ',
+    u'controlled_train_message': u'\u6b63\u5e38\u8f66\u6b21\uff0c\u4e0d\u53d7\u63a7',
+    u'lishi': u'18: 58',
+    u'location_code': u'Q7',
+    u'rz_num': u'--',
+    u'lishiValue': u'1138',
+    u'end_station_name': u'\u90d1\u5dde',
+    u'is_support_card': u'0',
+    u'start_train_date': u'20170426',
+    u'seat_types': u'1413',
+    u'gr_num': u'--',
+    u'from_station_no': u'01',
+    u'start_time': u'18: 21',
+    u'wz_num': u'\u6709',
+    u'to_station_telecode': u'ZZF',
+    u'train_seat_feature': u'3',
+    u'yp_ex': u'10401030',
+    u'start_city_code': u'1505',
+    u'yw_num': u'\u6709',
+    u'zy_num': u'--',
+    u'to_station_no': u'08',
+    u'control_train_day': u'20991231',
+    u'train_class_name': u'',
+    u'qt_num': u'--',
+    u'from_station_name': u'\u6df1\u5733\u4e1c',
+    u'arrive_time': u'13: 19',
+    u'station_train_code': u'Z148',
+    u'gg_num': u'--',
+    u'to_station_name': u'\u90d1\u5dde',
+    u'train_type_code': u'2',
+    u'sale_time': u'1000',
+    u'end_province_code': u'13'
+}
+
+正在校验验证码...
+校验验证码成功
+检查订单...
+检查订单成功
+提交订单排队...
+订单排队中...
+等待订单流水号...
+等待订单流水号失败
+{
+  "status": true,
+  "validateMessagesShowId": "_validatorMessage",
+  "messages": [], 
+  "httpstatus": 200,
+  "validateMessages": {},
+  "data": {
+    "count": 0,
+    "waitCount": 1,
+    "orderId": null,
+    "tourFlag": "dc",
+    "waitTime": 4,
+    "requestId": 6260049706678555235,
+    "queryOrderWaitTimeStatus": true
+  }
+}
+等待订单流水号...
+等待订单流水号失败
+{
+  "status": true,
+  "validateMessagesShowId": "_validatorMessage",
+  "messages": [],
+  "httpstatus": 200,
+  "validateMessages": {},
+  "data": {
+    "count": 0,
+    "waitCount": 1,
+    "orderId": null,
+    "tourFlag": "dc",
+    "waitTime": 4,
+    "requestId": 6260049706678555235,
+    "queryOrderWaitTimeStatus": true
+  }
+}
+等待订票结果...
+等待订票结果失败
+{
+  "status": true,
+  "validateMessagesShowId": "_validatorMessage",
+  "messages": [],
+  "httpstatus": 200,
+  "validateMessages": {},
+  "data": {
+    "submitStatus": false,
+    "errMsg": "网络传输过程中数据丢失，请查看未完成订单，继续支付！"
+  }
+}
+正在查询未完成订单...
+
+Request URL:https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=1492513184793&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=47f8de53109847fed5593361884e6c47
+Request Method:GET
+Status Code:200 OK
+Remote Address:127.0.0.1:8118
+
+
+Request URL:https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=1492513181776&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=47f8de53109847fed5593361884e6c47
+Request Method:GET
+Status Code:200 OK
+Remote Address:127.0.0.1:8118
+
+{"validateMessagesShowId":"_validatorMessage","status":true,"httpstatus":200,"data":{"queryOrderWaitTimeStatus":true,"count":0,"waitTime":4,"requestId":6260053976148677219,"waitCount":1,"tourFlag":"dc","orderId":null},"messages":[],"validateMessages":{}}
+
+
+{"validateMessagesShowId":"_validatorMessage","status":true,"httpstatus":200,"data":{"queryOrderWaitTimeStatus":true,"count":0,"waitTime":-1,"requestId":6260053976148677219,"waitCount":0,"tourFlag":"dc","orderId":"E370599736"},"messages":[],"validateMessages":{}}
+
+
+Request URL:https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=1492513184793&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=47f8de53109847fed5593361884e6c47
+Request Method:GET
+Status Code:200 OK
+Remote Address:127.0.0.1:8118
+
+
+Request URL:https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=1492513181776&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=47f8de53109847fed5593361884e6c47
+Request Method:GET
+Status Code:200 OK
+Remote Address:127.0.0.1:8118
+
+{"validateMessagesShowId":"_validatorMessage","status":true,"httpstatus":200,"data":{"queryOrderWaitTimeStatus":true,"count":0,"waitTime":4,"requestId":6260053976148677219,"waitCount":1,"tourFlag":"dc","orderId":null},"messages":[],"validateMessages":{}}
+
+
+{"validateMessagesShowId":"_validatorMessage","status":true,"httpstatus":200,"data":{"queryOrderWaitTimeStatus":true,"count":0,"waitTime":-1,"requestId":6260053976148677219,"waitCount":0,"tourFlag":"dc","orderId":"E370599736"},"messages":[],"validateMessages":{}}
+
