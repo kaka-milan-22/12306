@@ -512,26 +512,6 @@ class MyOrder(object):
             return None
 
 
-    # def transposition(self, pos):
-        # posList = pos.split(",")
-        # y = []
-        # x = []
-        # posstr = ""
-        # for k,v in enumerate(posList):
-            # if k % 2 == 0:
-                # x.append(int(v))
-            # else:
-                # y.append(int(v))
-
-        # x = map(lambda x:x*65, x)
-        # y = map(lambda x:x*65, y)
-
-        # tl = list(chain(zip(x,y)))
-        # for i in tl:
-            # posstr += "%s,%s," % (str(i[1]),str(i[0]))
-        # # print posstr[0:-1]
-        # return posstr[0:-1]
-
     def transposition(self, pos):
         posDict = {
         "1" : "65,65,",

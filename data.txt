@@ -9,6 +9,8 @@
 订单排队中...
 等待订单流水号...
 https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=1700510143187&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=9ad519fd35a835446b9c3e95a1bcaa34
+
+https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=1492513181776&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=47f8de53109847fed5593361884e6c47
 等待订单流水号失败
 {
   "status": true,
