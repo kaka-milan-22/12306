@@ -1047,7 +1047,6 @@ class MyOrder(object):
                         msg = prefix
                     else:  # 指定席位
                         for seat in self.notify['focus']['all']:
-                            print ypInfo
                             if seat in ypInfo and ypInfo[seat]['left']:
                                 msg += u'座位类型:%s, 剩余车票数量:%s, 票价:%s \n' % (
                                     seat if seat not in seatTypeCode else seatTypeCode[seat],
