@@ -924,6 +924,8 @@ class MyOrder(object):
         try:
             server = smtplib.SMTP()
             server.connect(self.notify['mail_server'])
+            print self.notify['mail_password']
+            print self.notify['mail_username']
             server.login(
                 self.notify['mail_username'],
                 self.notify['mail_password'])
@@ -1045,6 +1047,7 @@ class MyOrder(object):
                         msg = prefix
                     else:  # 指定席位
                         for seat in self.notify['focus']['all']:
+                            print ypInfo
                             if seat in ypInfo and ypInfo[seat]['left']:
                                 msg += u'座位类型:%s, 剩余车票数量:%s, 票价:%s \n' % (
                                     seat if seat not in seatTypeCode else seatTypeCode[seat],
@@ -1065,9 +1068,10 @@ class MyOrder(object):
                                     ypInfo[seat]['price'])
                         if msg:
                             msg = prefix + msg + u'\n'
-                self.notify['mail_content'] += msg
+            self.notify['mail_content'] += msg
         printDelimiter()
         if self.notify['mail_enable'] == 1:
+            print "***%s**" % self.notify['mail_content']
             if self.notify['mail_content']:
                 self.sendMailNotification()
                 return RET_OK
