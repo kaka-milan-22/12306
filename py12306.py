@@ -954,6 +954,8 @@ class MyOrder(object):
                 retlist.append(f)
             retdict['trainNo'] = retlist[3]
             retdict['secretStr'] = fields[0]
+            retdict['leftTicket'] = fields[12]
+            retdict['train_location'] = fields[15]
             retdict['startS'] = retlist[4]
             retdict['desS'] = retlist[7]
             retdict['start_time'] = retlist[10]
@@ -971,7 +973,6 @@ class MyOrder(object):
             self.trainsinfo.append(retdict)
             retdict = {}
             retlist = []
-        print self.trainsinfo
         return RET_OK
 
     def printTrains(self):
@@ -1015,6 +1016,7 @@ class MyOrder(object):
             item['yz'],
             item['wz'],
             )
+
         return RET_OK
 
     def selectAction(self):
@@ -1110,7 +1112,7 @@ class MyOrder(object):
         parameters = [
             #('ODA4NzIx', 'MTU0MTczYmQ2N2I3MjJkOA%3D%3D'),
             ('myversion', 'undefined'),
-            ('secretStr', self.trainsinfo[self.current_train_index - 1]['secretStr']),
+            ('secretStr', self.trainsinfo[self.current_train_index]['secretStr']),
             ('train_date', self.train_date),
             ('back_train_date', self.back_train_date),
             ('tour_flag', self.tour_flag),
@@ -1274,15 +1276,15 @@ class MyOrder(object):
     def confirmSingleForQueue(self):
         print(u'提交订单排队...')
         url = 'https://kyfw.12306.cn/otn/confirmPassenger/confirmSingleForQueue'
-        t = self.trains[self.current_train_index]['queryLeftNewDTO']
+        t = self.trainsinfo[self.current_train_index ]
         parameters = [
             ('passengerTicketStr', self.passengerTicketStr),
             ('oldPassengerStr', self.oldPassengerStr),
             ('randCode', self.captcha),
             ('purpose_codes', '00'),  # TODO
             ('key_check_isChange', self.keyCheckIsChange),
-            ('leftTicketStr', t['yp_info']),
-            ('train_location', t['location_code']),
+            ('leftTicketStr', t['leftTicket']),
+            ('train_location', t['train_location']),
             ('_json_att', ''),
             ('REPEAT_SUBMIT_TOKEN', self.repeatSubmitToken),
         ]
@@ -1475,13 +1477,13 @@ def main():
         #  continue
         # 提交订单到队里中
         tries = 0
-        while tries < 5:
+        while tries < 10:
             tries += 1
             if order.confirmSingleForQueue() == RET_OK:
                 break
         # 获取orderId
         tries = 0
-        while tries < 5:
+        while tries < 10:
             tries += 1
             if order.queryOrderWaitTime() == RET_OK:
                 break
