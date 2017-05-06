@@ -953,6 +953,7 @@ class MyOrder(object):
                 if f in stations: f = f.replace(f,mapDict[f])
                 retlist.append(f)
             retdict['trainNo'] = retlist[3]
+            retdict['secretStr'] = fields[0]
             retdict['startS'] = retlist[4]
             retdict['desS'] = retlist[7]
             retdict['start_time'] = retlist[10]
@@ -970,6 +971,7 @@ class MyOrder(object):
             self.trainsinfo.append(retdict)
             retdict = {}
             retlist = []
+        print self.trainsinfo
         return RET_OK
 
     def printTrains(self):
@@ -1108,7 +1110,7 @@ class MyOrder(object):
         parameters = [
             #('ODA4NzIx', 'MTU0MTczYmQ2N2I3MjJkOA%3D%3D'),
             ('myversion', 'undefined'),
-            ('secretStr', self.trainsinfo[self.current_train_index]['secretStr']),
+            ('secretStr', self.trainsinfo[self.current_train_index - 1]['secretStr']),
             ('train_date', self.train_date),
             ('back_train_date', self.back_train_date),
             ('tour_flag', self.tour_flag),
