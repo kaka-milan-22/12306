@@ -940,10 +940,12 @@ class MyOrder(object):
         一 二 商 特 软 硬 座 无
         -4 -5 -3 X -12 -7 -6 -7
         '''
+        if not self.trains.has_key('map'): return RET_ERR
         if self.trains.has_key('map'):mapDict = self.trains['map']
         if self.trains.has_key('result'):data = self.trains['result']
         retlist = []
         retdict = {}
+        self.trainsinfo = []
         for train in data:
             fields = train.split("|")
             stations = mapDict.keys()
@@ -953,24 +955,24 @@ class MyOrder(object):
             retdict['trainNo'] = retlist[3]
             retdict['startS'] = retlist[4]
             retdict['desS'] = retlist[7]
-            retdict['start_time'] = retlist[9]
-            retdict['des_time'] = retlist[10]
-            for k,v in  retdict.items():
-                print k,v,
-            print "+" * 100
+            retdict['start_time'] = retlist[10]
+            retdict['des_time'] = retlist[9]
+            retdict['zy'] = retlist[-4]
+            retdict['ze'] = retlist[-5]
+            retdict['swz'] = retlist[-3]
+            retdict['rw'] = retlist[-12]
+            retdict['yw'] = retlist[-7]
+            retdict['yz'] = retlist[-6]
+            retdict['wz'] = retlist[-7]
+            # for k,v in  retdict.items():
+                # print k,v,
+            # print "+" * 100
+            self.trainsinfo.append(retdict)
             retdict = {}
             retlist = []
+        return RET_OK
 
     def printTrains(self):
-        printDelimiter()
-        self.parseTrains()
-        print(u'余票查询结果如下:')
-        print(u"%s\t%s--->%s\n'有':票源充足  '无':票已售完  '*':未到起售时间  '--':无此席别" % (
-            self.train_date,
-            self.from_city_name,
-            self.to_city_name))
-        printDelimiter()
-        print(u'序号/车次\t乘车站\t目的站\t出发\t达到\t一等\t二等\t软卧\t硬卧\t硬座\t无座')
         seatTypeCode = {
             'swz': '商务座',
             'tz': '特等座',
@@ -984,14 +986,39 @@ class MyOrder(object):
             'wz': '无座',
             'qt': '其它',
         }
-        # print(u'(%d)   %s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s' % ()
+        printDelimiter()
+        self.canWebBuy = True
+        if  self.parseTrains() == -1: return RET_ERR
+        index = 0
+        print(u'余票查询结果如下:')
+        print(u"%s\t%s--->%s\n'有':票源充足  '无':票已售完  '*':未到起售时间  '--':无此席别" % (
+            self.train_date,
+            self.from_city_name,
+            self.to_city_name))
+        printDelimiter()
+        print(u'序号/车次\t乘车站\t目的站\t出发\t达到\t一等\t二等\t软卧\t硬卧\t硬座\t无座')
+        for item in self.trainsinfo:
+            index += 1
+            print(u'(%d)   %s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s') % (
+            index,
+            item['trainNo'],
+            item['startS'],
+            item['desS'],
+            item['start_time'],
+            item['des_time'],
+            item['zy'],
+            item['ze'],
+            item['rw'],
+            item['yw'],
+            item['yz'],
+            item['wz'],
+            )
         return RET_OK
 
-    # -1->重新查询/0->退出程序/1~len->车次序号
     def selectAction(self):
         ret = -1
         self.current_train_index = 0
-        trains_num = len(self.trains)
+        trains_num = len(self.trainsinfo)
         print(u'您可以选择:')
         if self.canWebBuy:
             print(u'1~%d.选择车次开始订票' % (trains_num))
@@ -1017,10 +1044,7 @@ class MyOrder(object):
             index = int(select)
             if index < 1 or index > trains_num:
                 print(u'输入的序号无效,请重新选择车次(1~%d)' % (trains_num))
-                index = selectTrain(self.trains)
-            if self.trains[index - 1]['queryLeftNewDTO']['canWebBuy'] != 'Y':
-                print(u'您选择的车次%s没票啦,请重新选择车次' % (self.trains[index - 1]['queryLeftNewDTO']['station_train_code']))
-                index = selectTrain(self.trains)
+                index = selectTrain(self.trainsinfo)
             ret = index
             self.current_train_index = index - 1
         elif select == 'p':
@@ -1084,7 +1108,7 @@ class MyOrder(object):
         parameters = [
             #('ODA4NzIx', 'MTU0MTczYmQ2N2I3MjJkOA%3D%3D'),
             ('myversion', 'undefined'),
-            ('secretStr', self.trains[self.current_train_index]['secretStr']),
+            ('secretStr', self.trainsinfo[self.current_train_index]['secretStr']),
             ('train_date', self.train_date),
             ('back_train_date', self.back_train_date),
             ('tour_flag', self.tour_flag),
