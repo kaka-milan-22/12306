@@ -1,0 +1,89 @@
+正在校验验证码...
+校验验证码成功
+检查订单...
+检查订单成功
+提交订单排队...
+订单排队中...
+等待订单流水号...
+等待订单流水号失败
+{
+  "status": true,
+  "validateMessagesShowId": "_validatorMessage",
+  "messages": [], 
+  "httpstatus": 200,
+  "validateMessages": {},
+  "data": {
+    "count": 0,
+    "waitCount": 1,
+    "orderId": null,
+    "tourFlag": "dc",
+    "waitTime": 4,
+    "requestId": 6260049706678555235,
+    "queryOrderWaitTimeStatus": true
+  }
+}
+等待订单流水号...
+等待订单流水号失败
+{
+  "status": true,
+  "validateMessagesShowId": "_validatorMessage",
+  "messages": [],
+  "httpstatus": 200,
+  "validateMessages": {},
+  "data": {
+    "count": 0,
+    "waitCount": 1,
+    "orderId": null,
+    "tourFlag": "dc",
+    "waitTime": 4,
+    "requestId": 6260049706678555235,
+    "queryOrderWaitTimeStatus": true
+  }
+}
+等待订票结果...
+等待订票结果失败
+{
+  "status": true,
+  "validateMessagesShowId": "_validatorMessage",
+  "messages": [],
+  "httpstatus": 200,
+  "validateMessages": {},
+  "data": {
+    "submitStatus": false,
+    "errMsg": "网络传输过程中数据丢失，请查看未完成订单，继续支付！"
+  }
+}
+正在查询未完成订单...
+
+Request URL:https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=1492513184793&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=47f8de53109847fed5593361884e6c47
+Request Method:GET
+Status Code:200 OK
+Remote Address:127.0.0.1:8118
+
+
+Request URL:https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=1492513181776&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=47f8de53109847fed5593361884e6c47
+Request Method:GET
+Status Code:200 OK
+Remote Address:127.0.0.1:8118
+
+{"validateMessagesShowId":"_validatorMessage","status":true,"httpstatus":200,"data":{"queryOrderWaitTimeStatus":true,"count":0,"waitTime":4,"requestId":6260053976148677219,"waitCount":1,"tourFlag":"dc","orderId":null},"messages":[],"validateMessages":{}}
+
+
+{"validateMessagesShowId":"_validatorMessage","status":true,"httpstatus":200,"data":{"queryOrderWaitTimeStatus":true,"count":0,"waitTime":-1,"requestId":6260053976148677219,"waitCount":0,"tourFlag":"dc","orderId":"E370599736"},"messages":[],"validateMessages":{}}
+
+
+Request URL:https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=1492513184793&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=47f8de53109847fed5593361884e6c47
+Request Method:GET
+Status Code:200 OK
+Remote Address:127.0.0.1:8118
+
+
+Request URL:https://kyfw.12306.cn/otn/confirmPassenger/queryOrderWaitTime?random=1492513181776&tourFlag=dc&_json_att=&REPEAT_SUBMIT_TOKEN=47f8de53109847fed5593361884e6c47
+Request Method:GET
+Status Code:200 OK
+Remote Address:127.0.0.1:8118
+
+{"validateMessagesShowId":"_validatorMessage","status":true,"httpstatus":200,"data":{"queryOrderWaitTimeStatus":true,"count":0,"waitTime":4,"requestId":6260053976148677219,"waitCount":1,"tourFlag":"dc","orderId":null},"messages":[],"validateMessages":{}}
+
+
+{"validateMessagesShowId":"_validatorMessage","status":true,"httpstatus":200,"data":{"queryOrderWaitTimeStatus":true,"count":0,"waitTime":-1,"requestId":6260053976148677219,"waitCount":0,"tourFlag":"dc","orderId":"E370599736"},"messages":[],"validateMessages":{}}
