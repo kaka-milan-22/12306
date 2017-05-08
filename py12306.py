@@ -947,29 +947,25 @@ class MyOrder(object):
         retdict = {}
         self.trainsinfo = []
         for train in data:
-            fields = train.split("|")
-            stations = mapDict.keys()
-            for f in fields:
-                if f in stations: f = f.replace(f,mapDict[f])
-                retlist.append(f)
-            retdict['trainNo'] = retlist[3]
-            retdict['secretStr'] = fields[0]
-            retdict['leftTicket'] = fields[12]
-            retdict['train_location'] = fields[15]
-            retdict['startS'] = retlist[4]
-            retdict['desS'] = retlist[7]
-            retdict['start_time'] = retlist[10]
-            retdict['des_time'] = retlist[9]
-            retdict['zy'] = retlist[-4]
-            retdict['ze'] = retlist[-5]
-            retdict['swz'] = retlist[-3]
-            retdict['rw'] = retlist[-12]
-            retdict['yw'] = retlist[-7]
-            retdict['yz'] = retlist[-6]
-            retdict['wz'] = retlist[-7]
-            # for k,v in  retdict.items():
-                # print k,v,
-            # print "+" * 100
+            for s in mapDict.keys():
+                if s in train: train = train.replace(s,mapDict[s])
+            train = train.split("|")
+            retdict['trainNo'] = train[3]
+            retdict['secretStr'] = train[0]
+            retdict['leftTicket'] = train[12]
+            retdict['train_location'] = train[15]
+            retdict['startS'] = train[4]
+            retdict['desS'] = train[7]
+            retdict['start_time'] = train[10]
+            retdict['des_time'] = train[9]
+            retdict['canWebBuy'] = train[11]
+            retdict['zy'] = train[-4] if len(train[-4]) > 0 else "--"
+            retdict['ze'] = train[-5] if len(train[-5]) > 0 else "--"
+            retdict['swz'] = train[-3] if len(train[-3]) > 0 else "--"
+            retdict['rw'] = train[-12] if len(train[-12]) > 0 else "--"
+            retdict['yw'] = train[-7] if len(train[-7]) > 0 else "--"
+            retdict['yz'] = train[-6] if len(train[-6]) > 0 else "--"
+            retdict['wz'] = "--"
             self.trainsinfo.append(retdict)
             retdict = {}
             retlist = []
@@ -991,8 +987,7 @@ class MyOrder(object):
         }
         printDelimiter()
         self.canWebBuy = True
-        if  self.parseTrains() == -1: return RET_ERR
-        index = 0
+        if  self.parseTrains() == RET_ERR: return RET_ERR
         print(u'余票查询结果如下:')
         print(u"%s\t%s--->%s\n'有':票源充足  '无':票已售完  '*':未到起售时间  '--':无此席别" % (
             self.train_date,
@@ -1000,6 +995,7 @@ class MyOrder(object):
             self.to_city_name))
         printDelimiter()
         print(u'序号/车次\t乘车站\t目的站\t出发\t达到\t一等\t二等\t软卧\t硬卧\t硬座\t无座')
+        index = 0
         for item in self.trainsinfo:
             index += 1
             print(u'(%d)   %s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s') % (
@@ -1478,12 +1474,14 @@ def main():
         # 提交订单到队里中
         tries = 0
         while tries < 10:
+            time.sleep(1)
             tries += 1
             if order.confirmSingleForQueue() == RET_OK:
                 break
         # 获取orderId
         tries = 0
         while tries < 10:
+            time.sleep(1)
             tries += 1
             if order.queryOrderWaitTime() == RET_OK:
                 break
