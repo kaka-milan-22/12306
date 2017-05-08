@@ -512,7 +512,7 @@ class MyOrder(object):
             return None
 
 
-    def transposition(self, pos):
+    def transposition(self, posList):
         posDict = {
         "1" : "65,65,",
         "2" : "130,65,",
@@ -524,11 +524,8 @@ class MyOrder(object):
         "8" : "260,130,",
         }
         randstr = ""
-        pos = str(pos)
-        posList = pos.split(",")
         for p in posList:
             randstr += posDict[p]
-        print randstr[0:-1]
         return randstr[0:-1]
 
     def getCaptcha(self, url):
@@ -539,10 +536,16 @@ class MyOrder(object):
                 fd.write(chunk)
         print(u'请输入4位图片验证码(回车刷新验证码):')
         captcha = raw_input()
-        if len(captcha) >= 1:
-            return self.transposition(captcha)
+        if not len(captcha) >= 1:
+            return RET_ERR
         else:
-            return 1  # 刷新
+            captcha = str(captcha)
+            posList = captcha.split(",")
+            for p in posList:
+                if int(p) > 8:
+                    print(u'验证码不合规，应该小于等于8!')
+                    return RET_ERR
+            return self.transposition(posList)
 
     def initStation(self):
         url = 'https://kyfw.12306.cn/otn/resources/js/framework/station_name.js'
@@ -702,7 +705,6 @@ class MyOrder(object):
             else:
                 parameters.append(('_json_att', ''))
                 parameters.append(('REPEAT_SUBMIT_TOKEN', self.repeatSubmitToken))
-            print parameters
             payload = urllib.urlencode(parameters)
             print(u'正在校验验证码...')
             r = self.post(url, payload)
@@ -1473,14 +1475,14 @@ def main():
         #  continue
         # 提交订单到队里中
         tries = 0
-        while tries < 10:
+        while tries < 5:
             time.sleep(1)
             tries += 1
             if order.confirmSingleForQueue() == RET_OK:
                 break
         # 获取orderId
         tries = 0
-        while tries < 10:
+        while tries < 5:
             time.sleep(1)
             tries += 1
             if order.queryOrderWaitTime() == RET_OK:
