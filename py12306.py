@@ -922,21 +922,22 @@ class MyOrder(object):
         msg['Subject'] = u'余票信息'
         msg['From'] = me
         msg['To'] = ';'.join(self.notify['mail_to'])
-        try:
-            server = smtplib.SMTP()
-            server.connect(self.notify['mail_server'])
-            print self.notify['mail_password']
-            print self.notify['mail_username']
-            server.login(
-                self.notify['mail_username'],
-                self.notify['mail_password'])
-            server.sendmail(me, self.notify['mail_to'], msg.as_string())
-            server.close()
-            print(u'发送邮件提醒成功')
-            return True
-        except Exception as e:
-            print(u'发送邮件提醒失败, %s' % str(e))
-            return False
+        # try:
+        server = smtplib.SMTP_SSL()
+        server.connect(self.notify['mail_server'],465)
+        print self.notify['mail_password']
+        print self.notify['mail_username']
+        server.login(
+            self.notify['mail_username'],
+            self.notify['mail_password'])
+        server.sendmail(me, self.notify['mail_to'], msg.as_string())
+        server.close()
+        print(u'发送邮件提醒成功')
+        return True
+        # except Exception as e:
+            # print(u'发送邮件提醒失败, %s' % str(e))
+            # return False
+
     def parseTrains(self):
         '''
         一 二 商 特 软 硬 座 无
@@ -958,8 +959,10 @@ class MyOrder(object):
             retdict['train_location'] = train[15]
             retdict['startS'] = train[4]
             retdict['desS'] = train[7]
-            retdict['start_time'] = train[10]
+            retdict['start_time'] = train[8]
             retdict['des_time'] = train[9]
+            retdict['lishi'] = train[10]
+            retdict['traindate'] = train[13]
             retdict['canWebBuy'] = train[11]
             retdict['zy'] = train[-4] if len(train[-4]) > 0 else "--"
             retdict['ze'] = train[-5] if len(train[-5]) > 0 else "--"
@@ -988,8 +991,8 @@ class MyOrder(object):
             'qt': '其它',
         }
         printDelimiter()
-        self.canWebBuy = True
         if  self.parseTrains() == RET_ERR: return RET_ERR
+
         print(u'余票查询结果如下:')
         print(u"%s\t%s--->%s\n'有':票源充足  '无':票已售完  '*':未到起售时间  '--':无此席别" % (
             self.train_date,
@@ -998,7 +1001,9 @@ class MyOrder(object):
         printDelimiter()
         print(u'序号/车次\t乘车站\t目的站\t出发\t达到\t一等\t二等\t软卧\t硬卧\t硬座\t无座')
         index = 0
+        self.notify['mail_content'] = ''
         for item in self.trainsinfo:
+            if item['canWebBuy'] == 'Y': self.canWebBuy = True
             index += 1
             print(u'(%d)   %s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s') % (
             index,
@@ -1015,6 +1020,34 @@ class MyOrder(object):
             item['wz'],
             )
 
+            if self.notify['mail_enable'] == 1 and item['canWebBuy'] == 'Y':
+                msg = u'[%s]车次%s[%s/%s->%s/%s, 历时%s]现在有票啦\n' % (
+                    item['trainNo'],
+                    item['traindate'],
+                    item['startS'],
+                    item['desS'],
+                    item['start_time'],
+                    item['des_time'],
+                    item['lishi'])
+            self.notify['mail_content'] += msg
+
+        printDelimiter()
+        if self.notify['mail_enable'] == 1:
+            print "***%s**" % self.notify['mail_content']
+            if self.notify['mail_content']:
+                self.sendMailNotification()
+                return RET_OK
+            else:
+                length = len(self.notify['dates'])
+                if length > 1:
+                    self.train_date = self.notify['dates'][
+                        random.randint(
+                            0,
+                            length -
+                            1)]
+                return RET_ERR
+        else:
+            return RET_OK
         return RET_OK
 
     def selectAction(self):
