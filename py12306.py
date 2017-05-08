@@ -922,21 +922,21 @@ class MyOrder(object):
         msg['Subject'] = u'余票信息'
         msg['From'] = me
         msg['To'] = ';'.join(self.notify['mail_to'])
-        # try:
-        server = smtplib.SMTP_SSL()
-        server.connect(self.notify['mail_server'],465)
-        print self.notify['mail_password']
-        print self.notify['mail_username']
-        server.login(
-            self.notify['mail_username'],
-            self.notify['mail_password'])
-        server.sendmail(me, self.notify['mail_to'], msg.as_string())
-        server.close()
-        print(u'发送邮件提醒成功')
-        return True
-        # except Exception as e:
-            # print(u'发送邮件提醒失败, %s' % str(e))
-            # return False
+        try:
+            server = smtplib.SMTP_SSL()
+            server.connect(self.notify['mail_server'],465)
+            # print self.notify['mail_password']
+            # print self.notify['mail_username']
+            server.login(
+                self.notify['mail_username'],
+                self.notify['mail_password'])
+            server.sendmail(me, self.notify['mail_to'], msg.as_string())
+            server.close()
+            print(u'发送邮件提醒成功')
+            return True
+        except Exception as e:
+            print(u'发送邮件提醒失败, %s' % str(e))
+            return False
 
     def parseTrains(self):
         '''
