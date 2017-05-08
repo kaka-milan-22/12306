@@ -915,23 +915,29 @@ class MyOrder(object):
     def sendMailNotification(self):
         print(u'正在发送邮件提醒...')
         me = u'订票提醒<%s>' % (self.notify['mail_username'])
-        msg = MIMEText(
-            self.notify['mail_content'],
-            _subtype='plain',
-            _charset='utf-8')
+        # Add the From: To: and Subject: headers at the start!
+        msg = {}
         msg['Subject'] = u'余票信息'
         msg['From'] = me
+        msg['From'] = self.notify['mail_username']
         msg['To'] = ';'.join(self.notify['mail_to'])
+        msg['content'] = self.notify['mail_content']
+        mcontent = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n"
+               % (msg['From'], msg['To'], msg['Subject']))
+        mcontent += msg['content']
+        print mcontent
         try:
-            server = smtplib.SMTP_SSL()
-            server.connect(self.notify['mail_server'],465)
-            # print self.notify['mail_password']
-            # print self.notify['mail_username']
+            server = smtplib.SMTP_SSL(host='smtp.qq.com', port=465)
+            # server = smtplib.SMTP_SSL()
+            server.set_debuglevel(1)    # 开启调试，会打印调试信息
+            # server.connect(self.notify['mail_server'],465)
+            print self.notify['mail_password']
+            print self.notify['mail_username']
             server.login(
                 self.notify['mail_username'],
                 self.notify['mail_password'])
-            server.sendmail(me, self.notify['mail_to'], msg.as_string())
-            server.close()
+            server.sendmail(me, self.notify['mail_to'], mcontent)
+            server.quit()
             print(u'发送邮件提醒成功')
             return True
         except Exception as e:
