@@ -918,13 +918,15 @@ class MyOrder(object):
         msg = MIMEText(
             self.notify['mail_content'],
             _subtype='plain',
-            _charset='gb2312')
+            _charset='utf-8')
         msg['Subject'] = u'余票信息'
         msg['From'] = me
         msg['To'] = ';'.join(self.notify['mail_to'])
         try:
-            server = smtplib.SMTP_SSL()
-            server.connect(self.notify['mail_server'],465)
+            # server = smtplib.SMTP_SSL()
+            server = smtplib.SMTP()
+            # server.connect(self.notify['mail_server'],25)
+            server.connect(self.notify['mail_server'])
             # print self.notify['mail_password']
             # print self.notify['mail_username']
             server.login(
