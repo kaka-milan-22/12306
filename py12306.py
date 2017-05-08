@@ -1025,7 +1025,6 @@ class MyOrder(object):
             item['yz'],
             item['wz'],
             )
-
             if self.notify['mail_enable'] == 1 and item['canWebBuy'] == 'Y':
                 msg = u'[%s]车次%s[%s/%s->%s/%s, 历时%s]现在有票啦\n' % (
                     item['trainNo'],
@@ -1035,6 +1034,8 @@ class MyOrder(object):
                     item['start_time'],
                     item['des_time'],
                     item['lishi'])
+            else:
+                msg = ''
             self.notify['mail_content'] += msg
 
         printDelimiter()
