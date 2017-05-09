@@ -929,10 +929,10 @@ class MyOrder(object):
         try:
             server = smtplib.SMTP_SSL(host='smtp.qq.com', port=465)
             # server = smtplib.SMTP_SSL()
-            server.set_debuglevel(1)    # 开启调试，会打印调试信息
+            # server.set_debuglevel(1)    # 开启调试，会打印调试信息
             # server.connect(self.notify['mail_server'],465)
-            print self.notify['mail_password']
-            print self.notify['mail_username']
+            # print self.notify['mail_password']
+            # print self.notify['mail_username']
             server.login(
                 self.notify['mail_username'],
                 self.notify['mail_password'])
